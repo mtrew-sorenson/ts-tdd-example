@@ -14,8 +14,10 @@ export default function TemperatureConverter() {
     input,
   } = useTemperatureConverter();
 
+  const [localTemp, setLocalTemp] = React.useState(0);
+
   useEffect(() => {
-    fetchData("https://www.google.com");
+    fetchData().then((res) => setLocalTemp(res[0].temperature));
   }, []);
 
   return (
@@ -47,6 +49,7 @@ export default function TemperatureConverter() {
         Convert
       </button>
       <p>{isConverted && `${temperature} ${scale}`}</p>
+      <p>Local Temp: {localTemp}</p>
     </StyledTemperatureContainer>
   );
 }
