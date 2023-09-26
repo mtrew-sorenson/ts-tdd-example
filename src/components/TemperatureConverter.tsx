@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import { useTemperatureConverter } from "./useTemperatureConverter";
+import { fetchData } from "../utils";
 
 export default function TemperatureConverter() {
   const {
@@ -12,6 +13,10 @@ export default function TemperatureConverter() {
     isConverted,
     input,
   } = useTemperatureConverter();
+
+  useEffect(() => {
+    fetchData("https://www.google.com");
+  }, []);
 
   return (
     <StyledTemperatureContainer>

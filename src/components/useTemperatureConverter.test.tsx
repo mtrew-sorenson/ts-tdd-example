@@ -4,12 +4,17 @@ import { ChangeEvent } from "react";
 
 test("it converts temperatures correctly", () => {
   const { result } = renderHook(() => useTemperatureConverter());
+  const spy = jest.spyOn(result.current, "handleChange");
   act(() => {
     result.current.handleChange({
       target: { value: "32" },
     } as ChangeEvent<HTMLInputElement>);
   });
   expect(result.current.temperature).toBe(32);
+  expect(spy).toHaveBeenCalledTimes(1);
+  expect(spy).toHaveBeenCalledWith({
+    target: { value: "32" },
+  });
 
   act(() => {
     result.current.handleToggleChange({

@@ -1,8 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import TemperatureConverter from "./TemperatureConverter";
+import * as utils from "../utils";
+import exp from "constants";
 test("renders input, radio buttons, and  convert button", () => {
+  const spy = jest.spyOn(utils, "fetchData");
   render(<TemperatureConverter />);
   // first step
+
+  expect(spy).toHaveBeenCalledWith("https://www.google.com");
+  expect(spy).toHaveBeenCalledTimes(1);
   const input = screen.getByPlaceholderText(/enter temperature/i);
   expect(input).toBeInTheDocument();
   // go over and add this in app.js
